@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - master  # Set a branch name to trigger deployment
+      - master # Set a branch name to trigger deployment
   pull_request:
 
 jobs:
@@ -14,19 +14,19 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Install Node.js && Build
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: 16
-        run: npm -v
-        run: npm install
-        run: npm run build
-      
+      - run: npm -v
+      - run: npm install
+      - run: npm run build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        # If you're changing the branch from main, 
-        # also change the `main` in `refs/heads/main` 
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
         # below accordingly.
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
