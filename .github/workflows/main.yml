@@ -14,6 +14,15 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
+      - name: Install Node.js && Build
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm -v
+      - run: npm install
+      - run: npm run build
+      
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         # If you're changing the branch from main, 
